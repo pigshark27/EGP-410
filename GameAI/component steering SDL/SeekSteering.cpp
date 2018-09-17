@@ -7,7 +7,7 @@
 #include "Unit.h"
 
 
-SeekSteering::SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/)
+SeekSteering::SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/ )
 	: Steering()
 {
 	if (shouldFlee)
@@ -46,11 +46,15 @@ Steering* SeekSteering::getSteering()
 		diff = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
 	}
 
+
+	float dir = atan2(diff.getY(), diff.getX()) + atan(1) * 4 / 2;
+	pOwner->getPositionComponent()->setFacing(dir);
+
 	diff.normalize();
 	diff *= pOwner->getMaxAcc();
-
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	data.acc = diff;
+
 	data.rotVel = 1.0f;
 	this->mData = data;
 	return this;

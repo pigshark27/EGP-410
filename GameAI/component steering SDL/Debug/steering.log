@@ -1,0 +1,9 @@
+﻿  PlayerMoveToMessage.cpp
+  Generating Code...
+  Compiling...
+  SeekSteering.cpp
+c:\users\johnk\onedrive\documents\github\egp-410\gameai\component steering sdl\seeksteering.cpp(50): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  SteeringComponent.cpp
+  steering.vcxproj -> C:\Users\johnk\OneDrive\Documents\GitHub\EGP-410\GameAI\component steering SDL\Debug\steering.exe
