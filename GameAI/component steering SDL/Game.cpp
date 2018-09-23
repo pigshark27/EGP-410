@@ -207,8 +207,10 @@ void Game::processLoop()
 			mShouldExit = true;
 		}
 	}
-	Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
-	if (pUnit == NULL)
+
+
+	//Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
+	//if (pUnit == NULL)
 	{
 		mpUnitManager->deleteRandomUnit();
 	}

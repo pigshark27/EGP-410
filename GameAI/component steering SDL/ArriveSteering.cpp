@@ -16,7 +16,7 @@ ArriveSteering::ArriveSteering(const UnitID& ownerID, const Vector2D& targetLoc,
 	}
 	else
 	{
-		mType = Steering::SEEK;
+		mType = Steering::ARRIVE;
 	}
 	setOwnerID(ownerID);
 	setTargetID(targetID);
@@ -26,8 +26,11 @@ ArriveSteering::ArriveSteering(const UnitID& ownerID, const Vector2D& targetLoc,
 Steering* ArriveSteering::getSteering()
 {
 	Vector2D diff;
+	float distance;
+	float targetSpeed;
+	
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
-	//are we seeking a location or a unit?
+	//seeking a unit
 
 	if (mTargetID != INVALID_UNIT_ID)
 	{
@@ -37,7 +40,7 @@ Steering* ArriveSteering::getSteering()
 		mTargetLoc = pTarget->getPositionComponent()->getPosition();
 	}
 
-	if (mType == Steering::SEEK)
+	if (mType == Steering::ARRIVE)
 	{
 		diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
 	}
@@ -46,14 +49,36 @@ Steering* ArriveSteering::getSteering()
 		diff = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
 	}
 
-
+	//face sprite at target
 	float dir = atan2(diff.getY(), diff.getX()) + atan(1) * 4 / 2;
 	pOwner->getPositionComponent()->setFacing(dir);
 
-	diff.normalize();
-	diff *= pOwner->getMaxAcc();
+	
+
+	//movement
+	distance = diff.getLength();
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
-	data.acc = diff;
+	if (distance < targetRad) 
+	{
+		data.acc = 0;
+		data.vel = 0;
+		data.rotAcc = 0;
+		data.rotVel = 0;
+	}
+	if (distance > slowRad)
+	{
+		targetSpeed = pOwner->getMaxSpeed();
+	}
+	else
+	{
+		targetSpeed =  pOwner->getMaxSpeed() * distance / slowRad;
+	}
+	
+	diff.normalize();
+	diff *= targetSpeed;
+
+	data.acc = diff - data.vel;
+	data.acc /= 0.1;
 
 	data.rotVel = 1.0f;
 	this->mData = data;
