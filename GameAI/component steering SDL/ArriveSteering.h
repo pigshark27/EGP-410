@@ -10,6 +10,9 @@ public:
 protected:
 	virtual Steering* getSteering();
 
+	Vector2D diff;
+	float distance;
+	float targetSpeed;
 	float targetRad = 1;
 	float slowRad = 100;
 

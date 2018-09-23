@@ -103,10 +103,10 @@ bool Game::init()
 	}
 
 	//setup units
-	Unit* pUnit = mpUnitManager->createPlayerUnit(*pArrowSprite);
+	Unit* pUnit = mpUnitManager->createPlayerUnit(*pArrowSprite, true, PositionData(Vector2D(300, 300), 0.0f));
 	pUnit->setShowTarget(true);
 	pUnit->setSteering(Steering::SEEK, ZERO_VECTOR2D);
-
+	
 	//create 2 enemies
 	pUnit = mpUnitManager->createUnit(*pEnemyArrow, true, PositionData(Vector2D((float)gpGame->getGraphicsSystem()->getWidth()-1, 0.0f), 0.0f));
 	pUnit->setShowTarget(true);
@@ -202,12 +202,13 @@ void Game::processLoop()
 		const Uint8 *state = SDL_GetKeyboardState(NULL);
 
 		//if escape key was down then exit the loop
-		if( state[SDL_SCANCODE_ESCAPE] )
+		if( state[SDL_SCANCODE_ESCAPE] ) // cahnge to recieve message
 		{
 			mShouldExit = true;
 		}
 	}
 
+	//bunch of enemies
 
 	//Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
 	//if (pUnit == NULL)

@@ -11,11 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArriveFaceSteering.h" />
     <ClInclude Include="ArriveSteering.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="FaceSteering.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMessage.h" />
@@ -34,12 +36,16 @@
     <ClInclude Include="SteeringComponent.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitManager.h" />
+    <ClInclude Include="WanderChaseSteering.h" />
+    <ClInclude Include="WanderSteering.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArriveFaceSteering.cpp" />
     <ClCompile Include="ArriveSteering.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentManager.cpp" />
+    <ClCompile Include="FaceSteering.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMessage.cpp" />
@@ -59,6 +65,8 @@
     <ClCompile Include="SteeringComponent.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitManager.cpp" />
+    <ClCompile Include="WanderChaseSteering.cpp" />
+    <ClCompile Include="WanderSteering.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{07ED8114-0659-4424-9468-50DBBEA5882A}</ProjectGuid>

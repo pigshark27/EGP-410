@@ -25,9 +25,6 @@ ArriveSteering::ArriveSteering(const UnitID& ownerID, const Vector2D& targetLoc,
 
 Steering* ArriveSteering::getSteering()
 {
-	Vector2D diff;
-	float distance;
-	float targetSpeed;
 	
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
 	//seeking a unit
