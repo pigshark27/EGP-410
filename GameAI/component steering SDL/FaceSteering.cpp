@@ -80,12 +80,12 @@ Steering* FaceSteering::getSteering()
 		}
 		if (fmod(targetRotation - currentRotation + 360, 360) < 180)
 		{
-			data.rotVel = 1.0f;
+			data.rotVel = 2.0f;
 			data.rotAcc = 1.0f;
 		}
 		else
 		{
-			data.rotVel = -1.0f;
+			data.rotVel = -2.0f;
 			data.rotAcc = 1.0f;
 		}
 		
