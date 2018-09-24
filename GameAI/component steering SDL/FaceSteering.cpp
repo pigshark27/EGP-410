@@ -57,33 +57,38 @@ Steering* FaceSteering::getSteering()
 	data.vel = 0;
 	data.acc = 0;
 
-	targetRotation = atan2(direction.getX(), direction.getY());
-	targetRotation = targetRotation * RAD2DEG - 90;
+	targetRotation = atan2(-direction.getX(), direction.getY()) + 3.1415926;
+	targetRotation = targetRotation * RAD2DEG + 270;
 	targetRotation = fmod(targetRotation, 360);
 
-	currentRotation = pOwner->getFacing() * RAD2DEG - 90;
-	currentRotation = -fmod(currentRotation, 360);
+	currentRotation = (pOwner->getFacing()) * RAD2DEG + 270;
+	currentRotation = fmod(currentRotation, 360);
 
 	std::cout << "targetRotation: " <<targetRotation << " currentRotation: " << currentRotation << std::endl; // print statement
 
 
-	if (currentRotation < targetRotation + 5 && currentRotation > targetRotation - 5)
+	if (currentRotation < targetRotation + 2 && currentRotation > targetRotation - 2)
 	{
 		data.rotVel = 0.0f;
 		data.rotAcc = 0.0f;
 	}
 	else
 	{
-		if (targetRotation > 0)
+		if (currentRotation < 0)
 		{
-			data.rotVel = -1.0f;
-			data.rotAcc = 1.0f;
+			//targetRotation += 360;
 		}
-		else
+		if (fmod(targetRotation - currentRotation + 360, 360) < 180)
 		{
 			data.rotVel = 1.0f;
 			data.rotAcc = 1.0f;
 		}
+		else
+		{
+			data.rotVel = -1.0f;
+			data.rotAcc = 1.0f;
+		}
+		
 
 	}
 	
