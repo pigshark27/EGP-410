@@ -6,9 +6,6 @@
 #include "UnitManager.h"
 #include "Unit.h"
 
-const float PI = 3.1415926;
-const float RAD2DEG = 180 /PI;
-const float DEG2RAD = PI/ 180;
 
 FaceSteering::FaceSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/)
 	: Steering()
@@ -73,42 +70,23 @@ Steering* FaceSteering::getSteering()
 	if (currentRotation < targetRotation + 5 && currentRotation > targetRotation - 5)
 	{
 		data.rotVel = 0.0f;
+		data.rotAcc = 0.0f;
 	}
 	else
 	{
 		if (targetRotation > 0)
 		{
 			data.rotVel = -1.0f;
+			data.rotAcc = 1.0f;
 		}
 		else
 		{
 			data.rotVel = 1.0f;
+			data.rotAcc = 1.0f;
 		}
 
 	}
 	
-
-	
-
-	
-
-	//targetRotation = targetRotation % 360;
-
-	//targetRotation ;
-
-	//dir = targetRotation;
-
-	//data.rotAcc *= targetRotation;
-
-	//pOwner->getPositionComponent()->setFacing(dir);
-
-
-/*
-direction.normalize();
-direction *= pOwner->getMaxAcc();
-
-data.acc = direction;
-*/
 
 
 	this->mData = data;
