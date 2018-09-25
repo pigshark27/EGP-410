@@ -15,10 +15,10 @@ protected:
 	float targetOrientation;
 
 	Vector2D target;
-	float wanderOffset = 170;
-	float wanderRadius = 10;
-	float wanderRate = 0.5; //2 * 3.1415926;
-	float wanderOrientation = 0;
+	float wanderOffset = 200;
+	float wanderRadius = 50;
+	float wanderRate = 0.8; //2 * 3.1415926;
+	float wanderOrientation;
 
 
 private:

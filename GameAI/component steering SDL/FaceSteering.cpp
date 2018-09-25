@@ -10,17 +10,14 @@
 FaceSteering::FaceSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/)
 	: Steering()
 {
-	if (shouldFlee)
-	{
-		mType = Steering::FLEE;
-	}
-	else
-	{
-		mType = Steering::FACE;
-	}
+
+	mType = Steering::FACE;
+
 	setOwnerID(ownerID);
 	setTargetID(targetID);
 	setTargetLoc(targetLoc);
+
+	currentRotation = 0;
 }
 
 Steering* FaceSteering::getSteering()
@@ -37,15 +34,8 @@ Steering* FaceSteering::getSteering()
 		mTargetLoc = pTarget->getPositionComponent()->getPosition();
 	}
 
-	if (mType == Steering::FACE)
-	{
 		direction = mTargetLoc - pOwner->getPositionComponent()->getPosition();
-	}
-	else
-	{
-		direction = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
-	}
-
+	
 	//face
 	distance = direction.getLength();
 	if (distance == 0)
@@ -54,45 +44,44 @@ Steering* FaceSteering::getSteering()
 		data.rotVel = 0.0f;
 	}
 	
-	data.vel = 0;
-	data.acc = 0;
-
-	targetRotation = atan2(-direction.getX(), direction.getY()) + 3.1415926;
+	
+	targetRotation = atan2(-direction.getX(), direction.getY()); + 3.1415926;
 	targetRotation = targetRotation * RAD2DEG + 270;
 	targetRotation = fmod(targetRotation, 360);
 
-	currentRotation = (pOwner->getFacing()) * RAD2DEG + 270;
+	currentRotation = (pOwner->getFacing()) * RAD2DEG + 180;
 	currentRotation = fmod(currentRotation, 360);
 
-	std::cout << "targetRotation: " <<targetRotation << " currentRotation: " << currentRotation << std::endl; // print statement
+	if (currentRotation < 0)
+	{
+		currentRotation += 360;
+	}
 
-
-	if (currentRotation < targetRotation + 2 && currentRotation > targetRotation - 2)
+	if (currentRotation < targetRotation + 4 && currentRotation > targetRotation - 4)
 	{
 		data.rotVel = 0.0f;
 		data.rotAcc = 0.0f;
 	}
 	else
 	{
-		if (currentRotation < 0)
-		{
-			//targetRotation += 360;
-		}
+		
 		if (fmod(targetRotation - currentRotation + 360, 360) < 180)
 		{
-			data.rotVel = 2.0f;
+			//data.rotVel = 2.0f;
 			data.rotAcc = 1.0f;
+
 		}
-		else
+		if (fmod(targetRotation - currentRotation + 360, 360) >= 180)
 		{
-			data.rotVel = -2.0f;
-			data.rotAcc = 1.0f;
+			//data.rotVel = -2.0f;
+			data.rotAcc = -1.0f;
+
 		}
 		
 
 	}
 	
-
+	std::cout << "targetRotation: " <<targetRotation << " currentRotation: " << currentRotation << std::endl; // print statement
 
 	this->mData = data;
 	return this;
