@@ -45,18 +45,19 @@ public:
 	inline UnitManager* getUnitManager() { return mpUnitManager; };
 	inline Timer* getMasterTimer() const { return mpMasterTimer; };
 	inline double getCurrentTime() const { return mpMasterTimer->getElapsedTime(); };
+	bool mShouldExit;
+	SpriteManager* mpSpriteManager;
+	UnitManager* mpUnitManager;
 
 private:
 	GraphicsSystem* mpGraphicsSystem;
 	GraphicsBufferManager* mpGraphicsBufferManager;
-	SpriteManager* mpSpriteManager;
 	GameMessageManager* mpMessageManager;
 	ComponentManager* mpComponentManager;
-	UnitManager* mpUnitManager;
 	Font* mpFont;
 	Timer* mpLoopTimer;
 	Timer* mpMasterTimer;
-	bool mShouldExit;
+	
 
 	//should be somewhere else
 	GraphicsBufferID mBackgroundBufferID = "woods";

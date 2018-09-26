@@ -1,3 +1,2 @@
-﻿  ArriveFaceSteering.cpp
-c:\users\johnk\onedrive\documents\github\egp-410\gameai\component steering sdl\facesteering.h(17): warning C4305: 'initializing': truncation from 'double' to 'float'
+﻿  Game.cpp
   steering.vcxproj -> C:\Users\johnk\OneDrive\Documents\GitHub\EGP-410\GameAI\component steering SDL\Debug\steering.exe

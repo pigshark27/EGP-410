@@ -24,17 +24,7 @@ Steering* WanderSteering::getSteering()
 {
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
-	//data.rotVel = 0;
-	//seeking a unit
-	/*
-	if (mTargetID != INVALID_UNIT_ID)
-	{
-		//seeking unit
-		Unit* pTarget = gpGame->getUnitManager()->getUnit(mTargetID);
-		assert(pTarget != NULL);
-		mTargetLoc = pTarget->getPositionComponent()->getPosition();
-	}
-	*/
+	
 	
 
 	//movement
@@ -55,7 +45,7 @@ Steering* WanderSteering::getSteering()
 
 	data.acc = getDirectionVector(pOwner->getFacing()) * pOwner->getMaxAcc();
 
-	std::cout << "Wander Orientation " << wanderOrientation << std::endl;
+	//std::cout << "Wander Orientation " << wanderOrientation << std::endl;
 
 	this->mData = data;
 	return this;

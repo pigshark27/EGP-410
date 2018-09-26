@@ -34,6 +34,7 @@ public:
 	void updateAll(float elapsedTime);
 
 	Unit* getPlayerUnit() const { return getUnit(PLAYER_UNIT_ID); };
+	int maxUnitPool;
 
 private:
 	static UnitID msNextUnitID;

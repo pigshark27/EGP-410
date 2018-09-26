@@ -9,13 +9,13 @@
 #include "GraphicsBuffer.h"
 #include "Font.h"
 #include "GraphicsBufferManager.h"
-#include "GameMessageManager.h"
 #include "Sprite.h"
 #include "SpriteManager.h"
 #include "Timer.h"
 #include "PlayerMoveToMessage.h"
 #include "ComponentManager.h"
 #include "UnitManager.h"
+#include "InputManager.h"
 
 Game* gpGame = NULL;
 
@@ -107,7 +107,7 @@ bool Game::init()
 	pUnit->setShowTarget(true);
 	pUnit->setSteering(Steering::ARRIVEFACE, ZERO_VECTOR2D);
 	
-	//create 2 enemies
+	/* //create 2 enemies
 	pUnit = mpUnitManager->createUnit(*pEnemyArrow, true, PositionData(Vector2D((float)gpGame->getGraphicsSystem()->getWidth()-1, 0.0f), 0.0f));
 	pUnit->setShowTarget(true);
 	pUnit->setSteering(Steering::SEEK, ZERO_VECTOR2D, PLAYER_UNIT_ID);
@@ -115,7 +115,7 @@ bool Game::init()
 	pUnit = mpUnitManager->createUnit(*pEnemyArrow, true, PositionData(Vector2D(0.0f, (float)gpGame->getGraphicsSystem()->getHeight()-1), 0.0f));
 	pUnit->setShowTarget(false);
 	pUnit->setSteering(Steering::FLEE, ZERO_VECTOR2D, PLAYER_UNIT_ID);
-
+	*/
 
 	return true;
 }
@@ -184,38 +184,19 @@ void Game::processLoop()
 
 	mpMessageManager->processMessagesForThisframe();
 
-	//get input - should be moved someplace better
-	SDL_PumpEvents();
+	//process input manager
+	InputManager input;
+	input.process();
 
-	if( SDL_GetMouseState(&x,&y) & SDL_BUTTON(SDL_BUTTON_LEFT) )
+
+	//Update the arrows 
+
+
+	//crashes when you hit "d" when enabled.... why???!?!?!?!
+	//for (int i = 1; i < mpUnitManager->maxUnitPool; i++)
 	{
-		Vector2D pos( x, y );
-		GameMessage* pMessage = new PlayerMoveToMessage( pos );
-		MESSAGE_MANAGER->addMessage( pMessage, 0 );
+	//	mpUnitManager->getUnit(i)->setSteering(Steering::WANDERCHASE, gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition());
 	}
-
-
-	
-	//all this should be moved to InputManager!!!
-	{
-		//get keyboard state
-		const Uint8 *state = SDL_GetKeyboardState(NULL);
-
-		//if escape key was down then exit the loop
-		if( state[SDL_SCANCODE_ESCAPE] ) // cahnge to recieve message
-		{
-			mShouldExit = true;
-		}
-	}
-
-	//bunch of enemies
-
-	//Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
-	//if (pUnit == NULL)
-	{
-		mpUnitManager->deleteRandomUnit();
-	}
-
 }
 
 bool Game::endLoop()

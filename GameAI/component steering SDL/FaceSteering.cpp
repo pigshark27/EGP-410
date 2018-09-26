@@ -81,7 +81,7 @@ Steering* FaceSteering::getSteering()
 
 	}
 	
-	std::cout << "targetRotation: " <<targetRotation << " currentRotation: " << currentRotation << std::endl; // print statement
+	//std::cout << "targetRotation: " <<targetRotation << " currentRotation: " << currentRotation << std::endl; // print statement
 
 	this->mData = data;
 	return this;
