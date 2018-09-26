@@ -10,14 +10,8 @@
 ArriveSteering::ArriveSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/)
 	: Steering()
 {
-	if (shouldFlee)
-	{
-		mType = Steering::FLEE;
-	}
-	else
-	{
-		mType = Steering::ARRIVE;
-	}
+	
+	mType = Steering::ARRIVE;
 	setOwnerID(ownerID);
 	setTargetID(targetID);
 	setTargetLoc(targetLoc);
@@ -27,6 +21,7 @@ Steering* ArriveSteering::getSteering()
 {
 	
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
+	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	//seeking a unit
 
 	if (mTargetID != INVALID_UNIT_ID)
@@ -37,25 +32,18 @@ Steering* ArriveSteering::getSteering()
 		mTargetLoc = pTarget->getPositionComponent()->getPosition();
 	}
 
-	if (mType == Steering::ARRIVE)
-	{
-		diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
-	}
-	else
-	{
-		diff = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
-	}
+	diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
+	
 
 	//face sprite at target
-	float dir = atan2(diff.getY(), diff.getX()) + atan(1) * 4 / 2;
-	pOwner->getPositionComponent()->setFacing(dir);
+	float dir = atan2(diff.getY(), diff.getX()); //+ atan(1) * 4 / 2
+	//pOwner->getPositionComponent()->setFacing(dir);
 
 	
 
 	//movement
 	distance = diff.getLength();
-	PhysicsData data = pOwner->getPhysicsComponent()->getData();
-	if (distance < targetRad) 
+	if (distance <= targetRad) 
 	{
 		data.acc = 0;
 		data.vel = 0;
@@ -77,7 +65,6 @@ Steering* ArriveSteering::getSteering()
 	data.acc = diff - data.vel;
 	data.acc /= 0.1;
 
-	data.rotVel = 1.0f;
 	this->mData = data;
 	return this;
 }

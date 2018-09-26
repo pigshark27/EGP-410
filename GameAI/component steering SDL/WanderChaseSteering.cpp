@@ -2,6 +2,8 @@
 
 #include "Steering.h"
 #include "WanderChaseSteering.h"
+#include "WanderSteering.h"
+#include "SeekSteering.h"
 #include "Game.h"
 #include "UnitManager.h"
 #include "Unit.h"
@@ -10,14 +12,8 @@
 WanderChaseSteering::WanderChaseSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/)
 	: Steering()
 {
-	if (shouldFlee)
-	{
-		mType = Steering::FLEE;
-	}
-	else
-	{
-		mType = Steering::WANDERCHASE;
-	}
+	
+	mType = Steering::WANDERCHASE;
 	setOwnerID(ownerID);
 	setTargetID(targetID);
 	setTargetLoc(targetLoc);
@@ -27,7 +23,7 @@ Steering* WanderChaseSteering::getSteering()
 {
 
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
-	//seeking a unit
+	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 
 	if (mTargetID != INVALID_UNIT_ID)
 	{
@@ -37,47 +33,26 @@ Steering* WanderChaseSteering::getSteering()
 		mTargetLoc = pTarget->getPositionComponent()->getPosition();
 	}
 
-	if (mType == Steering::WANDERCHASE)
-	{
-		diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
-	}
-	else
-	{
-		diff = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
-	}
-
-	//face sprite at target
-	float dir = atan2(diff.getY(), diff.getX()) + atan(1) * 4 / 2;
-	pOwner->getPositionComponent()->setFacing(dir);
-
-
-
+	diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
+	
 	//movement
 	distance = diff.getLength();
-	PhysicsData data = pOwner->getPhysicsComponent()->getData();
+
+	WanderSteering wander(mOwnerID, mTargetLoc, mTargetID, false);
+	SeekSteering seek(mOwnerID, mTargetLoc, mTargetID, false);
+	
 	if (distance < targetRad)
 	{
-		data.acc = 0;
-		data.vel = 0;
-		data.rotAcc = 0;
-		data.rotVel = 0;
-	}
-	if (distance > slowRad)
-	{
-		targetSpeed = pOwner->getMaxSpeed();
+		data.rotAcc = seek.getSteering()->getData().rotAcc;
+		data.acc = seek.getSteering()->getData().acc;
 	}
 	else
 	{
-		targetSpeed = pOwner->getMaxSpeed() * distance / slowRad;
+		data.rotAcc = wander.getSteering()->getData().rotAcc;
+		data.acc = wander.getSteering()->getData().acc;
 	}
-
-	diff.normalize();
-	diff *= targetSpeed;
-
-	data.acc = diff - data.vel;
-	data.acc /= 0.1;
-
-	data.rotVel = 1.0f;
+	
+	
 	this->mData = data;
 	return this;
 }

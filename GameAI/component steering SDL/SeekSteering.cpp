@@ -2,6 +2,7 @@
 
 #include "Steering.h"
 #include "SeekSteering.h"
+#include "FaceSteering.h"
 #include "Game.h"
 #include "UnitManager.h"
 #include "Unit.h"
@@ -27,6 +28,7 @@ Steering* SeekSteering::getSteering()
 {
 	Vector2D diff;
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
+	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	//are we seeking a location or a unit?
 	
 	if (mTargetID != INVALID_UNIT_ID)
@@ -47,15 +49,18 @@ Steering* SeekSteering::getSteering()
 	}
 
 
-	float dir = atan2(diff.getY(), diff.getX()) + atan(1) * 4 / 2;
-	pOwner->getPositionComponent()->setFacing(dir);
+	//float dir = atan2(diff.getY(), diff.getX());
+	//pOwner->getPositionComponent()->setFacing(dir);
+
+	//Look Steering
+	FaceSteering lookSteering(mOwnerID, mTargetLoc, mTargetID, false);
+	data.rotAcc = lookSteering.getSteering()->getData().rotAcc;
+
 
 	diff.normalize();
 	diff *= pOwner->getMaxAcc();
-	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	data.acc = diff;
 
-	//data.rotVel = 1.0f;
 	this->mData = data;
 	return this;
 }
