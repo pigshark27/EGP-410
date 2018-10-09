@@ -1,2 +1,7 @@
-﻿  Game.cpp
+﻿  FlockingSteering.cpp
+c:\users\johnk\onedrive\documents\github\egp-410\gameai\component steering sdl\flockingsteering.h(24): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\johnk\onedrive\documents\github\egp-410\gameai\component steering sdl\facesteering.h(18): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\johnk\onedrive\documents\github\egp-410\gameai\component steering sdl\separationsteering.h(23): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\johnk\onedrive\documents\github\egp-410\gameai\component steering sdl\wandersteering.h(20): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\johnk\onedrive\documents\github\egp-410\gameai\component steering sdl\flockingsteering.cpp(58): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   steering.vcxproj -> C:\Users\johnk\OneDrive\Documents\GitHub\EGP-410\GameAI\component steering SDL\Debug\steering.exe

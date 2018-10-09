@@ -26,7 +26,6 @@ Steering* WanderSteering::getSteering()
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	
 	
-
 	//movement
 
 	wanderOrientation += genRandomBinomial() * wanderRate;
@@ -39,7 +38,7 @@ Steering* WanderSteering::getSteering()
 
 
 	//Look Steering
-	FaceSteering lookSteering(mOwnerID, target, mTargetID,  false);
+	FaceSteering lookSteering(mOwnerID, target, mTargetID, false);
 	data.rotAcc = lookSteering.getSteering()->getData().rotAcc;
 	//data.rotVel = lookSteering.getSteering()->getData().rotVel;
 

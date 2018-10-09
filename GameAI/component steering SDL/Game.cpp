@@ -102,10 +102,12 @@ bool Game::init()
 		mpSpriteManager->createAndManageSprite(TARGET_SPRITE_ID, pTargetBuffer, 0, 0, (float)pTargetBuffer->getWidth(), (float)pTargetBuffer->getHeight());
 	}
 
-	//setup units
+//setup player 
+	/*
 	Unit* pUnit = mpUnitManager->createPlayerUnit(*pArrowSprite , true, PositionData(Vector2D(500, 400), 0.0f));
 	pUnit->setShowTarget(true);
 	pUnit->setSteering(Steering::ARRIVEFACE, ZERO_VECTOR2D);
+	*/
 	
 	/* //create 2 enemies
 	pUnit = mpUnitManager->createUnit(*pEnemyArrow, true, PositionData(Vector2D((float)gpGame->getGraphicsSystem()->getWidth()-1, 0.0f), 0.0f));
@@ -166,7 +168,7 @@ void Game::processLoop()
 
 	//draw units
 	mpUnitManager->drawAll();
-
+	
 	SDL_PumpEvents();
 	int x, y;
 	SDL_GetMouseState(&x, &y);
@@ -193,6 +195,8 @@ void Game::processLoop()
 
 
 	//crashes when you hit "d" when enabled.... why???!?!?!?!
+	//possibly array out of bonds since it references a unit pool larger than what exists.
+
 	//for (int i = 1; i < mpUnitManager->maxUnitPool; i++)
 	{
 	//	mpUnitManager->getUnit(i)->setSteering(Steering::WANDERCHASE, gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition());

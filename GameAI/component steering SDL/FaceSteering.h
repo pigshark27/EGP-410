@@ -13,9 +13,10 @@ protected:
 	float distance;
 	float targetRotation;
 	float currentRotation;
+	float rotationDiff;
 	float dir;
 	float PI = 3.1415926;
 	float RAD2DEG = 180 / PI;
 	float DEG2RAD = PI / 180;
-	float slowDeg = 10;
+	float slowDeg = 90;
 };

@@ -75,8 +75,8 @@ Unit* UnitManager::createRandomUnit(const Sprite& sprite)
 	Unit* pUnit = createUnit(sprite, true, PositionData(Vector2D(posX,posY),0), PhysicsData(Vector2D(velX,velY),Vector2D(0.1f,0.1f), 0.1f, 0.05f));
 	if (pUnit != NULL)
 	{
-		//pUnit->setSteering(Steering::SEEK, Vector2D(rand() % gpGame->getGraphicsSystem()->getWidth(), rand() % gpGame->getGraphicsSystem()->getHeight()));
-		pUnit->setSteering(Steering::WANDERCHASE, gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition());
+		pUnit->setSteering(Steering::FLOCKING, Vector2D(rand() % gpGame->getGraphicsSystem()->getWidth(), rand() % gpGame->getGraphicsSystem()->getHeight()));
+		//pUnit->setSteering(Steering::FLOCKING, gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition());
 	}
 	return pUnit;
 }
@@ -154,3 +154,4 @@ void UnitManager::updateAll(float elapsedTime)
 		it->second->update(elapsedTime);
 	}
 }
+

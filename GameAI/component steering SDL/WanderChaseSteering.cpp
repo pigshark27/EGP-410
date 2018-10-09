@@ -25,20 +25,17 @@ Steering* WanderChaseSteering::getSteering()
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 
-	if (mTargetID != INVALID_UNIT_ID)
-	{
-		//seeking unit
-		Unit* pTarget = gpGame->getUnitManager()->getUnit(mTargetID);
-		assert(pTarget != NULL);
-		mTargetLoc = pTarget->getPositionComponent()->getPosition();
-	}
-
+	
+	//seeking unit
+	Unit* pTarget = gpGame->getUnitManager()->getUnit(mTargetID);
+	
 	diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
 	
 	//movement
 	distance = diff.getLength();
 
 	WanderSteering wander(mOwnerID, mTargetLoc, mTargetID, false);
+	mTargetLoc = pTarget->getPositionComponent()->getPosition();
 	SeekSteering seek(mOwnerID, mTargetLoc, mTargetID, false);
 	
 	if (distance < targetRad)

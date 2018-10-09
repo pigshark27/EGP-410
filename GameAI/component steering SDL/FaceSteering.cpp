@@ -57,6 +57,9 @@ Steering* FaceSteering::getSteering()
 		currentRotation += 360;
 	}
 
+	rotationDiff = fmod(targetRotation - currentRotation + 360, 360);
+
+
 	if (currentRotation < targetRotation + 4 && currentRotation > targetRotation - 4)
 	{
 		data.rotVel = 0.0f;
@@ -65,20 +68,28 @@ Steering* FaceSteering::getSteering()
 	else
 	{
 		
-		if (fmod(targetRotation - currentRotation + 360, 360) < 180)
+		if (rotationDiff < 180)
 		{
-			//data.rotVel = 2.0f;
-			data.rotAcc = 2.0f;
-
+			data.rotAcc = 0;
+			data.rotVel = 1;
+			if (currentRotation > fmod(targetRotation - slowDeg + 360, 360))
+			{
+				//data.rotAcc *= rotationDiff / slowDeg;
+				//std::cout << data.rotAcc << std::endl; // print statement
+			}
 		}
-		if (fmod(targetRotation - currentRotation + 360, 360) >= 180)
+		if (rotationDiff >= 180)
 		{
-			//data.rotVel = -2.0f;
-			data.rotAcc = -2.0f;
-
+			data.rotAcc = 0;
+			data.rotVel = -1;
+			if (currentRotation < fmod(targetRotation + slowDeg + 360, 360))
+			{
+				//data.rotAcc *= slowDeg/rotationDiff;
+				//std::cout << data.rotAcc << std::endl; // print statement
+			}
+			
 		}
 		
-
 	}
 	
 	//std::cout << "targetRotation: " <<targetRotation << " currentRotation: " << currentRotation << std::endl; // print statement

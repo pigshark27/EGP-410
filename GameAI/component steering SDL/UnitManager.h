@@ -32,13 +32,15 @@ public:
 
 	void drawAll() const;
 	void updateAll(float elapsedTime);
+	
 
 	Unit* getPlayerUnit() const { return getUnit(PLAYER_UNIT_ID); };
 	int maxUnitPool;
+	std::map<UnitID, Unit*> mUnitMap;
 
 private:
 	static UnitID msNextUnitID;
 	MemoryPool mPool;
-	std::map<UnitID, Unit*> mUnitMap;
+	
 };
 
