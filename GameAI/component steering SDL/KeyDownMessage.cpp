@@ -22,8 +22,11 @@ void KeyDownMessage::process()
 	}
 	if (mKey == 1)
 	{
+		for (int i = 0; i < 10; i++)
+		{
+			Unit* pUnit = gpGame->mpUnitManager->createRandomUnit(*gpGame->mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
+		}
 		
-		Unit* pUnit = gpGame->mpUnitManager->createRandomUnit(*gpGame->mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
 	}
 	if (mKey == 2)
 	{
