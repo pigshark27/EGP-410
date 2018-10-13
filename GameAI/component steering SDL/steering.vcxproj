@@ -44,6 +44,7 @@
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="WanderChaseSteering.h" />
     <ClInclude Include="WanderSteering.h" />
+    <ClInclude Include="WeightManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlignmentSteering.cpp" />
@@ -79,6 +80,7 @@
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="WanderChaseSteering.cpp" />
     <ClCompile Include="WanderSteering.cpp" />
+    <ClCompile Include="WeightManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{07ED8114-0659-4424-9468-50DBBEA5882A}</ProjectGuid>

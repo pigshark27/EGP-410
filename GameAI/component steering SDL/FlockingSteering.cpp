@@ -10,6 +10,7 @@
 #include "Game.h"
 #include "UnitManager.h"
 #include "Unit.h"
+#include "WeightManager.h"
 
 
 FlockingSteering::FlockingSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/)
@@ -44,13 +45,11 @@ Steering* FlockingSteering::getSteering()
 		separation.getSteering();
 		AlignmentSteering alignment(mOwnerID, target, mTargetID, false);
 		alignment.getSteering();
+		WeightManager* weight = gpGame->mpWeightManager;
+		
 
-		flockTarget = ((cohesion.target * 0.5) + (separation.target * 0.25) + (alignment.target * 0.25)); //test values
+		flockTarget = ((cohesion.target * weight->C) + (separation.target * weight->S) + (alignment.target * weight->A)); //test values
 
-		//FaceSteering lookSteering(mOwnerID, flockTarget, mTargetID, false);
-		//lookSteering.getSteering();
-		//data.rotAcc = lookSteering.getSteering()->getData().rotAcc;
-		//data.rotVel = lookSteering.getSteering()->getData().rotVel;
 		flockTarget.normalize();
 		data.acc = flockTarget;//* data.maxSpeed;
 		data.acc *= data.maxAccMagnitude;
@@ -60,6 +59,7 @@ Steering* FlockingSteering::getSteering()
 
 		//std::cout << "Target: " << target.getX() << ", " << target.getY() << std::endl; // print statement
 		//std::cout << "Cohesion Target: " << cohesion.target.getX() << ", " << cohesion.target.getY() << std::endl; // print statement
+		std::cout << "C: " << weight->C << ", S: " << weight->S << ", A: " << weight->A << std::endl; // print statement
 	}
 	
 	else

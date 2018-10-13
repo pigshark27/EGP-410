@@ -16,6 +16,7 @@
 #include "ComponentManager.h"
 #include "UnitManager.h"
 #include "InputManager.h"
+#include "WeightManager.h"
 
 Game* gpGame = NULL;
 
@@ -25,16 +26,16 @@ const Uint32 MAX_UNITS = 100;
 
 Game::Game()
 	:mpGraphicsSystem(NULL)
-	,mpGraphicsBufferManager(NULL)
-	,mpSpriteManager(NULL)
-	,mpLoopTimer(NULL)
-	,mpMasterTimer(NULL)
-	,mpFont(NULL)
-	,mShouldExit(false)
-	,mBackgroundBufferID("")
-	,mpMessageManager(NULL)
-	,mpComponentManager(NULL)
-	,mpUnitManager(NULL)
+	, mpGraphicsBufferManager(NULL)
+	, mpSpriteManager(NULL)
+	, mpLoopTimer(NULL)
+	, mpMasterTimer(NULL)
+	, mpFont(NULL)
+	, mShouldExit(false)
+	, mBackgroundBufferID("")
+	, mpMessageManager(NULL)
+	, mpComponentManager(NULL)
+	, mpUnitManager(NULL)
 {
 }
 
@@ -118,6 +119,8 @@ bool Game::init()
 	pUnit->setShowTarget(false);
 	pUnit->setSteering(Steering::FLEE, ZERO_VECTOR2D, PLAYER_UNIT_ID);
 	*/
+	
+	mpWeightManager = new WeightManager;
 
 	return true;
 }

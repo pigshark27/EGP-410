@@ -4,6 +4,7 @@
 #include "PerformanceTracker.h"
 #include "Defines.h"
 #include <string>
+#include "WeightManager.h"
 
 class GraphicsSystem;
 class GraphicsBuffer;
@@ -48,6 +49,7 @@ public:
 	bool mShouldExit;
 	SpriteManager* mpSpriteManager;
 	UnitManager* mpUnitManager;
+	WeightManager* mpWeightManager;
 
 private:
 	GraphicsSystem* mpGraphicsSystem;

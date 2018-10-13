@@ -53,6 +53,62 @@ void InputManager::process()
 		GameMessage* pMessage = new KeyDownMessage(2);
 		MESSAGE_MANAGER->addMessage(pMessage, 1);
 	}
-	
+	if (state[SDL_SCANCODE_A])
+	{
+		GameMessage* pMessage = new KeyDownMessage(3);
+		MESSAGE_MANAGER->addMessage(pMessage, 1);
+	}
+
+//C
+	if (state[SDL_SCANCODE_Q])
+	{
+		if (state[SDL_SCANCODE_EQUALS])
+		{
+			GameMessage* pMessage = new KeyDownMessage(4);
+			MESSAGE_MANAGER->addMessage(pMessage, 1);
+		}
+		if (state[SDL_SCANCODE_MINUS])
+		{
+			GameMessage* pMessage = new KeyDownMessage(5);
+			MESSAGE_MANAGER->addMessage(pMessage, 1);
+		}
+		
+	}
+//S
+	if (state[SDL_SCANCODE_W])
+	{
+		if (state[SDL_SCANCODE_EQUALS])
+		{
+			GameMessage* pMessage = new KeyDownMessage(6);
+			MESSAGE_MANAGER->addMessage(pMessage, 1);
+		}
+		if (state[SDL_SCANCODE_MINUS])
+		{
+			GameMessage* pMessage = new KeyDownMessage(7);
+			MESSAGE_MANAGER->addMessage(pMessage, 1);
+		}
+
+	}
+//A
+	if (state[SDL_SCANCODE_E])
+	{
+		if (state[SDL_SCANCODE_EQUALS])
+		{
+			GameMessage* pMessage = new KeyDownMessage(8);
+			MESSAGE_MANAGER->addMessage(pMessage, 1);
+		}
+		if (state[SDL_SCANCODE_MINUS])
+		{
+			GameMessage* pMessage = new KeyDownMessage(9);
+			MESSAGE_MANAGER->addMessage(pMessage, 1);
+		}
+
+	}
+//to File
+	if (state[SDL_SCANCODE_F])
+	{
+		GameMessage* pMessage = new KeyDownMessage(10);
+		MESSAGE_MANAGER->addMessage(pMessage, 1);
+	}
 
 }
