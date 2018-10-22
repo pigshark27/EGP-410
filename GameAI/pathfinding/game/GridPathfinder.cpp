@@ -58,8 +58,8 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 	{
 		Color currentPathColor = pathColor;
 		unsigned int numNodes = mpPath->getNumNodes();
-
-		/*for( int i=1; i<numNodes-1; i++ )
+		/*
+		for( int i=1; i<numNodes-1; i++ )
 		{
 			mpVisualizer->addColor( mpPath->peekNode(i)->getId(), pathColor );
 		}*/

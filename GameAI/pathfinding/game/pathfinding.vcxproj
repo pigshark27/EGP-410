@@ -91,10 +91,13 @@
     <ClInclude Include="..\common\Renderer.h" />
     <ClInclude Include="..\common\Sprite.h" />
     <ClInclude Include="..\common\SpriteManager.h" />
+    <ClInclude Include="AStarPathfinder.h" />
+    <ClInclude Include="Compare.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="DebugContent.h" />
     <ClInclude Include="DebugDisplay.h" />
     <ClInclude Include="DepthFirstPathfinder.h" />
+    <ClInclude Include="DijkstraPathfinder.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameMessage.h" />
     <ClInclude Include="GameMessageManager.h" />
@@ -106,6 +109,7 @@
     <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="PathfindingDebugContent.h" />
     <ClInclude Include="PathToMessage.h" />
+    <ClInclude Include="PriorityQueue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Color.cpp" />
@@ -119,9 +123,11 @@
     <ClCompile Include="..\common\Renderer.cpp" />
     <ClCompile Include="..\common\Sprite.cpp" />
     <ClCompile Include="..\common\SpriteManager.cpp" />
+    <ClCompile Include="AStarPathfinder.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DebugDisplay.cpp" />
     <ClCompile Include="DepthFirstPathfinder.cpp" />
+    <ClCompile Include="DjkstraPathfinder.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameMessage.cpp" />
     <ClCompile Include="GameMessageManager.cpp" />

@@ -14,6 +14,11 @@ public:
 
 	const NODE_ID& getId() const {return mId;};
 
+	int backPointer = NULL;
+	float weight = 0;
+	float heurWeight = 0;
+
+
 private:
 	const NODE_ID mId;
 };
