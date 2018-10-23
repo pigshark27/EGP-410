@@ -5,6 +5,7 @@
 #include "Connection.h"
 #include "GridGraph.h"
 #include "Game.h"
+#include "Node.h"
 #include <PerformanceTracker.h>
 #include <list>
 #include <vector>
@@ -92,17 +93,17 @@ Path* DijkstraPathfinder::findPath(Node* pFrom, Node* pTo)
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 #ifdef VISUALIZE_PATH
-	 /* //uncomment and fix
-	delete(pPath);
+	 
+	delete pPath;
 	Path* fPath = new Path();
+	pCurrentNode = pTo;
+	//draw path back
 	while (pCurrentNode != pFrom) {
 		Node* thisNode = mpGraph->getNode(pCurrentNode->backPointer);
 		fPath->addNode(thisNode);
 		pCurrentNode = thisNode;
 	}
-	mpPath = fPath;// path that's visualized?
-	// */
-	mpPath = pPath; // delete
+	mpPath = fPath;
 
 #endif
 	return pPath;

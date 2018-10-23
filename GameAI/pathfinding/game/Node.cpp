@@ -8,6 +8,9 @@ Node::Node()
 Node::Node( const NODE_ID& id )
 :mId(id)
 {
+	backPointer = 0;
+	weight = 0;
+	heurWeight = 0;
 }
 
 Node::~Node()

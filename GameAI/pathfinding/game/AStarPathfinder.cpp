@@ -8,6 +8,7 @@
 #include "Vector2D.h"
 #include "Game.h"
 #include "GameApp.h"
+#include "Node.h"
 #include <PerformanceTracker.h>
 #include <list>
 #include <vector>
@@ -95,18 +96,18 @@ Path* AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 #ifdef VISUALIZE_PATH
-	/* //uncomment and fix
-   delete(pPath);
-   Path* fPath = new Path();
+	
+	delete pPath;
+	Path* fPath = new Path();
+   pCurrentNode = pTo;
+   //draw path back
    while (pCurrentNode != pFrom) {
 	   Node* thisNode = mpGraph->getNode(pCurrentNode->backPointer);
 	   fPath->addNode(thisNode);
 	   pCurrentNode = thisNode;
    }
-   mpPath = fPath;// path that's visualized?
-   // */
-	mpPath = pPath; // delete
-
+   mpPath = fPath;
+   
 #endif
 	return pPath;
 

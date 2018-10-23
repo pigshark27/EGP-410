@@ -57,13 +57,9 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 	if( mpPath != NULL )
 	{
 		Color currentPathColor = pathColor;
-		unsigned int numNodes = mpPath->getNumNodes();
-		/*
-		for( int i=1; i<numNodes-1; i++ )
-		{
-			mpVisualizer->addColor( mpPath->peekNode(i)->getId(), pathColor );
-		}*/
-		for (unsigned int i = 1; i < numNodes - 1; i++)
+		int numNodes = mpPath->getNumNodes(); //un unsigned
+		
+		for (int i = 1; i < numNodes - 1; i++)
 		{
 			mpVisualizer->addColor(mpPath->peekNode(i)->getId(), currentPathColor);
 			float lerpVal = lerp(i, 0, numNodes);
@@ -72,8 +68,11 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 
 
 		//add beginning and ending color
-		mpVisualizer->addColor(mpPath->peekNode(0)->getId(), startColor);
-		mpVisualizer->addColor( mpPath->peekNode( mpPath->getNumNodes()-1 )->getId(), stopColor );
+		if (numNodes != 0)//keeps bug from occurring caused by dragging mouse
+		{
+			mpVisualizer->addColor(mpPath->peekNode(0)->getId(), startColor);
+			mpVisualizer->addColor(mpPath->peekNode(mpPath->getNumNodes() - 1)->getId(), stopColor);
+		}
 	}
 
 	mpVisualizer->draw(*pDest);
