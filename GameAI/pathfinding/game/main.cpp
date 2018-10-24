@@ -28,6 +28,7 @@ int main(int argc, char **argv)
 	gpPerformanceTracker = new PerformanceTracker();
 
 	gpGame = new GameApp();
+	
 
 	gpGame->init();
 

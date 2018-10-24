@@ -63,12 +63,13 @@ Path* DepthFirstPathfinder::findPath( Node* pFrom, Node* pTo )
 		{
 			Connection* pConnection = connections[i];
 			Node* pTempToNode = connections[i]->getToNode();
-			if( !toNodeAdded && 
-				!pPath->containsNode( pTempToNode ) && 
-				find(nodesToVisit.begin(), nodesToVisit.end(), pTempToNode ) == nodesToVisit.end() )
+			if( !toNodeAdded && !pPath->containsNode( pTempToNode ) && find(nodesToVisit.begin(), nodesToVisit.end(), pTempToNode ) == nodesToVisit.end() )
 			{
-				//nodesToVisit.push_front( pTempToNode );//uncomment me for depth-first search
-				nodesToVisit.push_back( pTempToNode );//uncomment me for breadth-first search
+				pTempToNode->backPointer = pCurrentNode->getId();
+				
+				nodesToVisit.push_front( pTempToNode );//uncomment me for depth-first search
+				//nodesToVisit.push_back( pTempToNode );//uncomment me for breadth-first search
+
 				if( pTempToNode == pTo )
 				{
 					toNodeAdded = true;
@@ -85,7 +86,18 @@ Path* DepthFirstPathfinder::findPath( Node* pFrom, Node* pTo )
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 #ifdef VISUALIZE_PATH
-	mpPath = pPath;
+
+	delete pPath;
+	Path* fPath = new Path();
+	pCurrentNode = pTo;
+	//draw path back
+	while (pCurrentNode != pFrom) {
+		Node* thisNode = mpGraph->getNode(pCurrentNode->backPointer);
+		fPath->addNode(thisNode);
+		pCurrentNode = thisNode;
+	}
+	mpPath = fPath;
+
 #endif
 	return pPath;
 

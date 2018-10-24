@@ -46,6 +46,8 @@ public:
 	inline Font* getFont() const { return mpFont; };
 	inline void markForExit() { mShouldExit = true; };
 
+
+
 protected:
 	GraphicsSystem* mpGraphicsSystem;
 	GraphicsBufferManager* mpGraphicsBufferManager;
