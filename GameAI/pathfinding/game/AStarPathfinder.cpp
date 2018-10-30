@@ -71,6 +71,16 @@ Path* AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 			Connection* pConnection = connections[i];
 			Node* pTempToNode = connections[i]->getToNode();
 
+			// check closed list
+			if (pPath->containsNode(pTempToNode))
+			{
+				// check stored weight to current weight
+				if (pTempToNode->weight > pConnection->getCost() + pCurrentNode->weight)
+				{
+					//update current weight
+					pTempToNode->backPointer = pCurrentNode->getId();
+				}
+			}
 
 			if (!toNodeAdded && !pPath->containsNode(pTempToNode) && nodesToVisit.find(pTempToNode) == nodesToVisit.end())
 			{
